@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #define MAX[100]    // the maximum contact list size
 typedef struct
 {
@@ -15,7 +14,7 @@ typedef struct
 Contact list[MAX];
 
 int count =0;
-
+//=====================================================================
 void showContacts() 
 {
     if (count == 0){
@@ -36,6 +35,7 @@ void showContacts()
         for (int j =0; j <list[i].emailCount; j++)        printf("  - %s\n", list[i].emails[j]);
     }
 }
+//============================================================================
 void deleteContact() 
 {
     int x;
@@ -54,6 +54,7 @@ void deleteContact()
     count--;
     printf("Deleted.\n");
 }
+//===================================================================
 
 void searchName()
 {
@@ -76,10 +77,60 @@ void searchName()
 
     if (found ==0)     printf("No match.\n");
 }
+//==========================================================================
+
+void addContact()
+{
+    Contact c;
+    if (count >= MAX)
+    {
+        printf("Contact list is full!\n");
+        return;
+    }
+
+    printf("Enter name: ");  //take input name
+    fgets(c.name, sizeof(c.name), stdin);
+    c.name[strcspn(c.name, "\n")] = 0;  
+
+    printf("Enter address: ");  //take input address
+    fgets(c.address, sizeof(c.address), stdin);
+    c.address[strcspn(c.address, "\n")] = 0;
+
+    //---------- Phones -------------------------------------------------------------------
+    printf("How many phone numbers?(max 5): ");  //multiple phone numbers
+    scanf("%d", &c.phoneCount);
+    getchar();
+
+    if (c.phoneCount > 5)       c.phoneCount =5;
+
+    for (int i =0; i <c.phoneCount; i++)
+    {
+        printf(" Phone %d: ", i+1);
+        fgets(c.phones[i], sizeof(c.phones[i]), stdin);
+        c.phones[i][strcspn(c.phones[i], "\n")] = 0;  //strcspn --> gives index of newline
+    }
+
+    //------- Emails----------------------------------------------------------------------------
+    printf("How many emails?(max 5): ");  //multiple emails
+    scanf("%d", &c.emailCount);
+    getchar();
+
+    if (c.emailCount > 5) c.emailCount = 5;
+
+    for (int i =0; i <c.emailCount; i++)
+    {
+        printf(" Email %d: ", i+1);
+        fgets(c.emails[i], sizeof(c.emails[i]), stdin);
+        c.emails[i][strcspn(c.emails[i], "\n")] = 0;
+    }
+    list[count++] = c;
+    printf("Contact added.\n");
+}
+//=========================================================================
 
 
 
-
+//=================================================================================
 int main() 
 {
     int ch;
