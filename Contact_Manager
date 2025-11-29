@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #define MAX[100]    // the maximum contact list size
+
 typedef struct
 {
     char name[100];
