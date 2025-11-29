@@ -1,1 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
+
+
+int main() 
+{
+    int ch;
+    while()    //creates infinite loop as many times till user exits the loop
+    {  
+        printf("\n1. Add Contact\n2. Show Contacts\n3. Search by Name\n4. Delete\n5. Merge Duplicates\n6. Exit\nChoice: ");
+        scanf("%d", &ch);
+        getchar();  //catches the newline character
+
+        switch(ch) 
+        {
+            case 1: addContact();   break;
+            case 2: showContacts();   break;
+            case 3: searchName();   break;
+            case 4: deleteContact();   break;
+            case 5: mergeDuplicates();   break;
+            case 6:   return 0;
+            default: printf("Invalid.\n");
+        }
+    }
+}
