@@ -14,6 +14,29 @@ typedef struct
 }Contact;
 Contact list[MAX];
 
+int count =0;
+
+void showContacts() 
+{
+    if (count == 0){
+        printf("No contacts.\n");
+        return;
+    }
+
+    for(int i = 0; i<count; i++)
+    {
+        printf("\n[%d] %s\n", i, list[i].name);
+        printf(" Address: %s\n", list[i].address);
+
+        printf(" Phones:\n");
+        for (int j =0; j <list[i].phoneCount; j++)        printf("  - %s\n", list[i].phones[j]);
+
+        printf(" Emails:\n");
+
+        for (int j =0; j <list[i].emailCount; j++)        printf("  - %s\n", list[i].emails[j]);
+    }
+}
+
 int main() 
 {
     int ch;
