@@ -36,6 +36,25 @@ void showContacts()
         for (int j =0; j <list[i].emailCount; j++)        printf("  - %s\n", list[i].emails[j]);
     }
 }
+void deleteContact() 
+{
+    int x;
+    printf("Enter index to delete: ");
+    scanf("%d", &x);
+    getchar(); // remive newline character
+
+    if (x<0 || x>=count) 
+    {
+        printf("Invalid index.\n");
+        return;
+    }
+
+    for (int i =x; i <count-1; i++)        list[i] = list[i+1];
+
+    count--;
+    printf("Deleted.\n");
+}
+
 
 int main() 
 {
