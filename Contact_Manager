@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define MAX[100]    // the maximum contact list size
+#define MAX 100   // the maximum contact list size
 
 typedef struct
 {
@@ -129,13 +129,52 @@ void addContact()
 }
 //=========================================================================
 
+void mergeDuplicates(Contact list[], int *count)
+{
+    for (int i =0; i <*count; i++) 
+    {
+        for (int j =i+1; j <*count; j++)
+        {
+    // If names match ==> duplicate
+            if (strcmp(list[i].name, list[j].name) ==0){
+                printf("Duplicate found: %s\n", list[j].name);
 
+            // Merge phones
+                for (int p =0; p < list[j].phoneCount; p++)
+                {
+                    if (list[i].phoneCount < 5){  // max 5 phones
+                        strcpy(list[i].phones[list[i].phoneCount],
+                               list[j].phones[p]);
+                        list[i].phoneCount++;
+                    }
+                }
+            // Merge emails
+                for (int e =0; e < list[j].emailCount; e++)
+                {
+                    if (list[i].emailCount < 5){  // max 5 emails
+                        strcpy(list[i].emails[list[i].emailCount],
+                               list[j].emails[e]);
+                        list[i].emailCount++;
+                    }
+                }
 
+            // Delete list[j] by shifting left
+                for (int k =j; k <*count-1; k++)
+                {
+                    list[k] = list[k+1];
+                }
+                (*count)--;
+                j--;
+            }
+        }
+    }
+    printf("Duplicate merging complete.\n");
+}
 //=================================================================================
 int main() 
 {
     int ch;
-    while()    //creates infinite loop as many times till user exits the loop
+    while(1)    //creates infinite loop as many times till user exits the loop
     {  
         printf("\n1. Add Contact\n2. Show Contacts\n3. Search by Name\n4. Delete\n5. Merge Duplicates\n6. Exit\nChoice: ");
         scanf("%d", &ch);
@@ -147,7 +186,7 @@ int main()
             case 2: showContacts();   break;
             case 3: searchName();   break;
             case 4: deleteContact();   break;
-            case 5: mergeDuplicates();   break;
+            case 5: mergeDuplicates(list, &count);   break;
             case 6:   return 0;
             default: printf("Invalid.\n");
         }
