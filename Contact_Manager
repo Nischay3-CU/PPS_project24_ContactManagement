@@ -16,7 +16,7 @@ Contact list[MAX];
 
 int count =0;
 //=====================================================================
-void showContacts() 
+void showContacts()    
 {
     if (count == 0){
         printf("Oops!!! You have no connections yet...\n");
