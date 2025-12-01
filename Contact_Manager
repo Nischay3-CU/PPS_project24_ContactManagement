@@ -26,7 +26,7 @@ void showContacts()
     for(int i = 0; i<count; i++)
     {
         printf("\n[%d] %s\n", i, list[i].name);
-        printf(" Address: %s\n", list[i].address);
+        printf(" Address: %s\n", list[i].address);    
 
         printf(" Phones:\n");
         for (int j =0; j <list[i].phoneCount; j++)        printf("  - %s\n", list[i].phones[j]);
